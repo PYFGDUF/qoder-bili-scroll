@@ -19,6 +19,15 @@
 
 数据、凭证、日报都放在 `~/.qoder-bili-scroll/`，不在插件目录里。**升级插件不会覆盖登录、日报和笔记。**
 
+### 上游项目地址
+
+- **最初项目**：<https://github.com/lll-77777777/dsh-bili-scroll>
+- **本适配基于**：`c1overzz/dsh-bili-scroll` **v2.0.1** — <https://github.com/c1overzz/dsh-bili-scroll>
+- **内置 MCP 上游**：`adoresever/bilibili-mcp` — <https://github.com/adoresever/bilibili-mcp>
+
+> 本仓库是 **Qoder 适配层**，不是上游官方仓库。插件清单、MCP 白名单、命令 / Agent、策略闸、
+> 数据目录以及 Qoder 限制下的定时与私信方案都在本仓库；上游功能归属见 [NOTICE](./NOTICE)。
+
 ---
 
 ## 目录
@@ -866,11 +875,14 @@ cd qoder-bili-scroll
 
 本项目是 **Qoder 适配层**，基于：
 
-- [c1overzz/dsh-bili-scroll](https://github.com/c1overzz/dsh-bili-scroll) **v2.0.1**
+- **本适配基于**：`c1overzz/dsh-bili-scroll` **v2.0.1**
+  — <https://github.com/c1overzz/dsh-bili-scroll>
   （commit `31e3874f30418735692889305410253b625adef9`）
-- 更早的基线：[lll-77777777/dsh-bili-scroll](https://github.com/lll-77777777/dsh-bili-scroll)
+- **更早的基线**：`lll-77777777/dsh-bili-scroll`
+  — <https://github.com/lll-77777777/dsh-bili-scroll>
   （commit `0ce60bfeb29f5ee6bfec981d03843b2114943ad1`）
-- 内置 `vendor/bilibili-mcp/`：[adoresever/bilibili-mcp](https://github.com/adoresever/bilibili-mcp)，
+- **内置 `vendor/bilibili-mcp/`**：`adoresever/bilibili-mcp`
+  — <https://github.com/adoresever/bilibili-mcp>，
   Copyright (c) 2026 AGI_Ananas，MIT
 - 章程 `skills/bili-scroll/references/charter.md` 改编自上游 `prompts/duty.md`，保留中文红线措辞
 
