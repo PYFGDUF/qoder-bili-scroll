@@ -77,12 +77,11 @@ def get_cred() -> Credential:
 #    "只回我 @ 的那个人"原来只是"给那一轮的名单里不列别人"，**真到发出去那一下没人拦** ✗
 #    ⇒ 唯一能做成机器级保证的位置，就是这里：**发之前先把"要回的那条是谁写的"读出来核一遍**。
 #
-# 判据（跟插件那边 `lib/threads.mjs` 的 `isOwner` 保持同一口径）：
+# 判据（Qoder 适配版：主人身份必须显式）：
 #   ① 策略里钉了 UID（`owner.mid`）⇒ **只认这个 UID**（别人改成同一个昵称也没用）✓
-#   ② 只填了昵称 ⇒ 按昵称认（去掉开头的 @、空白、大小写；**不做模糊匹配**）
-#   ③ 两样都没有 ⇒ **谁都不回**（绝不退化成"回所有人"，那正是使用者最不想要的）
-#   ④ `allow` 里指名道姓列出来的（本人当场让发的 force）⇒ 直接放行
-#   ⑤ **认不出来就不发**（翻页/被删/网络错都算）—— 宁可沉默，也别把话说到别人那里去
+#   ② 没有 UID ⇒ **谁都不回**；绝不按昵称猜人（昵称不唯一，猜错会回到冒名者）
+#   ③ `allow` 里指名道姓列出来的（本人当场让发的 force）⇒ 直接放行
+#   ④ **认不出来就不发**（翻页/被删/网络错都算）—— 宁可沉默，也别把话说到别人那里去
 #
 # 策略文件由插件写在它的家目录（`BILI_DUTY_HOME`，退化到脚本所在目录）：
 #   `reply-policy.json` = { enabled, owner:{mid,name}, allow:[{bv,rpid,root}], allowNewComment }
@@ -191,22 +190,17 @@ async def reply_gate(bvid: str, rpid: int, root: int, oid: int):
 
     owner = pol.get("owner") or {}
     o_mid = int(owner.get("mid") or 0)
-    o_name = _norm_name(owner.get("name"))
-    if not o_mid and not o_name:
-        return False, "白名单开着但没填「要 @ 谁」⇒ 认不出本人 ⇒ 谁都不回"
+    if not o_mid:
+        return False, "策略里没有显式 Owner UID ⇒ 不按昵称猜人 ⇒ 谁都不回"
 
     who = await _comment_author(oid, rpid, root)
     if not who:
         return False, "核对不到这条评论是谁写的（翻页/已删/读不到）⇒ 为安全起见不发"
-    if o_mid:
-        ok = int(who["mid"]) == o_mid
-    else:
-        ok = bool(who["mid"]) and _norm_name(who["uname"]) == o_name
-    if ok:
+    if int(who["mid"]) == o_mid:
         return True, ""
     return False, "这条是「%s」（UID %s）写的，不是使用者本人「%s」（UID %s）⇒ 不理" % (
         who["uname"] or "（没名字）", who["mid"] or "？",
-        owner.get("name") or "（没填）", o_mid or "（没钉 UID，按昵称认）",
+        owner.get("name") or "（没填）", o_mid,
     )
 
 

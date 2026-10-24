@@ -223,7 +223,7 @@ async def poll_login() -> dict:
                 "message": "登录返回的凭证不完整或无效；已保留旧凭证，请重新扫码。",
                 "credential_file": str(CRED_FILE),
             }
-        # 换号/重新登录后，旧的 Owner UID 不再可信；下次收件箱按昵称重新认。
+        # 换号/重新登录后旧的 Owner UID 不再可信；重新配置 mentionUid 后才能继续。
         ledger.update_fields(
             owner={},
             me={"mid": me.get("mid"), "uname": me.get("uname"), "at": now_iso()},

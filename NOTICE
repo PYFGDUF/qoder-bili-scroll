@@ -25,7 +25,8 @@ Changes made for Qoder:
    under `~/.qoder-bili-scroll`.
 2. The vendored MCP server is imported by a whitelist wrapper. The wrapper keeps
    the original `reply_gate` (send-time author verification) instead of adopting
-   the v2.0 vendor removal; it adds a credential-file tolerance patch only.
+   the v2.0 vendor removal. Patches to it are limited to credential-file
+   tolerance and fail-closed owner verification (no nickname fallback).
 3. Credential and policy paths are redirected to the Qoder data directory.
 4. Machine-level live-run policy checks, per-round caps, cross-process file locks,
    and reply-text heuristics are added in front of `bili_reply`.

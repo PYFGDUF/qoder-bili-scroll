@@ -291,7 +291,7 @@ UP：示例 UP
 
 ### 方式 A：上传 ZIP（推荐）
 
-1. 打开 [Releases](https://github.com/PYFGDUF/qoder-bili-scroll/releases)，下载 `bili-scroll-0.2.1.zip`。
+1. 打开 [Releases](https://github.com/PYFGDUF/qoder-bili-scroll/releases)，下载 `bili-scroll-0.2.2.zip`。
    也可以从源码运行 `./scripts/package.sh` 自己打包。
 2. Qoder：**扩展 → 插件 → 添加插件 → 上传插件**，选择 ZIP。
 3. 安装后重启 Qoder，或执行 `/plugins reload`。
@@ -690,9 +690,10 @@ Qoder 没开着就不会跑。第二天用 `/bili-run` 补一轮即可；手动 
 - 想改用私信：`/bili-config dmMode=only`（并确认）；想两边都发：`dmMode=both`。
 - 迁移只执行一次，不会重复覆盖你的设置。
 
-### 0.2.0 → 0.2.1（安全收紧）
+### 0.2.0 → 0.2.2（安全收紧）
 
 - 主人身份**只认 `mentionUid`**（或登录账号本人）；不再按昵称搜索、不再用账本推断。
+- vendor 的 `reply_gate` 同步改为 fail-closed：策略里没有显式 Owner UID 就拒发，不再按昵称兜底。
 - 如果你只填了 `mentionName`、没填 `mentionUid`：私信和“只回本人”会停，直到你补上 UID。
   这是有意的失败关闭（fail-closed），不是 bug。
 - 插件升级不会动 `~/.qoder-bili-scroll/` 里的数据。
@@ -706,7 +707,7 @@ ZIP 安装没有自动回滚。重新上传旧版 ZIP 即可；数据目录会�
 
 ## 与上游的差异
 
-| 项目 | 上游 DSH v2.0.1 | 本适配 0.2.1 |
+| 项目 | 上游 DSH v2.0.1 | 本适配 0.2.2 |
 |---|---|---|
 | 宿主 | DSH 插件宿主 | Qoder 插件（Skill + Commands + Agent + MCP） |
 | 定时 | 宿主常驻定时器 | Qoder 本地自动化 + 手动轮次 |
@@ -890,7 +891,7 @@ to the owner via Bilibili DM. Public comments are off by default. The owner is i
 
 - **Stack**: Qoder Skill + 9 slash commands + Agent + a 23-tool MCP server.
 - **Data**: `~/.qoder-bili-scroll/` (credentials `0600`); plugin upgrades never overwrite it.
-- **Install**: upload `bili-scroll-0.2.1.zip` from Releases.
+- **Install**: upload `bili-scroll-0.2.2.zip` from Releases.
 - **First run**: `/bili-setup` → `/bili-login` → `/bili-config mentionUid=<uid>` → `/bili-run`.
 - **Requirements**: macOS/Linux (WSL on Windows), Python 3.10+ or uv.
 - **Limits**: no 1-minute DM polling; no reliable local Whisper; no cloud automation.
