@@ -1,0 +1,18 @@
+description = "手动刷一轮 B 站（搜索、读字幕、写日报；按配置决定是否发言）"
+prompt = """
+使用 bili-scroll 插件，手动跑一轮。
+
+1. 调用 bili_round_begin(mode="scan", source="manual")。
+2. 如果 next.action != "run"：只回一行 next.reason，结束；不要搜视频、不要发言。
+3. 如果 next.action == "run"：
+   - 用 Read 读取返回的 prompt_file；
+   - 严格按其中的章程执行，quota 是本轮最多看几条；
+   - 先看「主人的私信」名单，按名单回（bili_dm_reply，≤100 字）；
+   - 如果 report_file 非空，日报写到 report_file：每挑中一条首行 `### BV号`，下一行 `**档位**：值得看/可以看/不值当`；为空则不写日报（判重表照写）；
+   - 每看过一条用 bili_seen(action="add", ...) 落盘；
+   - 私信摘要由插件在 round_end 自动发；不要自己发私信；
+   - 结束时调用 bili_round_end(run_id=..., status="ok" 或 "failed", summary="一句话")。
+4. 不要用 Bash 自己拼 B 站接口；没有字幕就跳过，并在报告里写「因无字幕跳过 N 条」。
+5. 不要在聊天里输出账号、路径、隐私或内部细节。
+6. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用；不要改用 Bash 拼接口。
+"""

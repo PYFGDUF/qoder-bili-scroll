@@ -1,0 +1,28 @@
+description = "创建/更新每天定时刷一轮的本地自动化（默认 20:30）"
+prompt = """
+使用 bili-scroll 插件创建每日本地自动化。不要直接创建，先让用户确认。
+
+1. 先调用 bili_config(action="get", key="dailyRunTime") 读取用户设定的时间（默认 20:30），再读取 timezone（默认 Asia/Shanghai）；用户明确给了新时间/时区就用用户的。
+2. 用 Qoder 的定时任务工具执行 list，查看是否已有名称含“B站刷一轮”的本地任务；有就更新，没有才新建。
+3. 向用户展示将要保存的参数：
+   - 名称：B站刷一轮
+   - 位置：local（必须是本地；云端拿不到本地凭证与数据目录）
+   - 计划：每天第 1 步读到的时间（默认 20:30），时区用第 1 步读到的 timezone（默认 Asia/Shanghai；例如 20:30 → cron: 30 20 * * *）
+   - cwd：~/.qoder-bili-scroll
+   - 权限：Full Access
+   - prompt：
+     使用 bili-scroll 插件。调用 bili_round_begin(mode="scan", source="cron")。
+     （若工具没有直接暴露，先用 mcp_list 找到 bili-scroll 的 bili_round_begin，再用 mcp_call 调用。）
+     如果 next.action != "run"，只回一行原因并结束，不要搜视频、不要发言。
+     如果 next.action == "run"，读取返回的 prompt_file，严格按其中章程执行；
+     先看「主人的私信」名单并回（bili_dm_reply，≤100 字）；dmMode=only 时不要发公开评论；
+     本轮最多看 quota 条；如果 report_file 非空，日报写到 report_file（为空则不写日报）；
+     私信摘要由 bili_round_end 自动发，不要自己发私信；结束时调用
+     bili_round_end(run_id=..., status="ok" 或 "failed", summary="一句话")。
+     不要自行创建新的自动化。
+4. 得到用户明确确认后再创建/更新。
+5. 创建成功后报告任务 id 和下次运行时间；提醒用户：
+   - Qoder 没开着就不会跑，漏跑用 /bili-run 补；
+   - 本插件没有 1 分钟私信轮询，私信只在每轮/`/bili-dm` 时检查。
+6. 如果用户想改时间，用他给的时间替换 cron；不要改其他参数。
+"""

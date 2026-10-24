@@ -1,0 +1,17 @@
+description = "首次安装后检查刷B站插件：依赖、登录、配置"
+prompt = """
+使用 bili-scroll 插件做一次安装后检查。
+
+1. 调用 bili_env_check，确认 Python、依赖（bilibili-api-python / mcp / qrcode / Pillow）、数据目录、凭证、missingDeps、owner UID、dmMode。
+2. 如果工具不可用：说明插件 MCP 还没加载，让用户在“扩展 → 插件”里确认「刷B站」已安装并启用，然后重启 Qoder 或重新加载插件。
+3. 调用 bili_whoami：
+   - 已登录：报告昵称；
+   - 未登录：提示用户运行 /bili-login。
+4. 调用 bili_config(action="list")，用一张小表展示：perDay、perRound、keywords、reportLevel、dmMode、dmReply、dmReplyPerDay、mentionName、mentionUid、personaPrompt、autoComment、replyToComments。
+5. 明确告诉用户：
+   - 新装默认 dmMode=only（只发私信，不发公开评论）；
+   - 旧版 autoComment/replyToComments 用户会迁移成 dmMode=off（保留评论），并备份 config.json.v1.bak；
+   - 私信/只回本人必须填 mentionUid；插件不按昵称猜人。
+6. 不要替用户开启任何发言开关（dmMode/dmReply/autoComment/replyToComments）。
+7. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用；不要改用 Bash 拼接口。
+"""

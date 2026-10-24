@@ -1,0 +1,18 @@
+description = "扫码登录 B 站（换号也用这个）"
+prompt = """
+使用 bili-scroll 插件登录 B 站。
+
+1. 调用 bili_login_start。
+2. 如果 status=already_logged_in：
+   - 默认调用 bili_whoami，报告昵称后结束；
+   - 如果用户明确说要换号：先确认，再调用 bili_login_start(force=true) 重新生成二维码；
+   - 如果用户明确说要退出登录：先确认，再调用 bili_logout(confirm=true)，然后结束。
+3. 否则用 Bash 的 open 打开返回的 qr_file（macOS）；如果 open 不可用，把 qr_file 绝对路径告诉用户，让他自己打开。二维码太大时不要把它贴进聊天；需要终端版时用 cat 读 qr_text_file 给用户看。
+4. 每 3 秒调用一次 bili_login_poll，最多 60 次。用户扫码并确认后应返回 status=done。
+5. status=timeout 时提示二维码过期，让用户重新运行 /bili-login；不要自己循环重试超过 60 次。
+6. 成功后调用 bili_whoami，报出昵称和 mid；提醒用户：
+   - 扫码用的这个账号就是之后发私信/评论的账号，建议用小号；
+   - 如果私信要发给另一个号，必须设置 mentionUid 指向那个号；mentionName 只用于 @ 文案。
+7. 不要在这条命令里开启自动评论或回话。
+8. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用；不要改用 Bash 拼接口。
+"""

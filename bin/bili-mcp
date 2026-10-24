@@ -1,0 +1,13 @@
+#!/bin/sh
+# Qoder 插件 MCP 启动器。
+set -eu
+
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+PLUGIN_ROOT=$(dirname "$SCRIPT_DIR")
+
+export PYTHONUTF8=1
+export PYTHONIOENCODING=utf-8
+export PYTHONDONTWRITEBYTECODE=1
+
+PY=$("$SCRIPT_DIR/bootstrap.sh") || exit $?
+exec "$PY" "$PLUGIN_ROOT/bin/lib/mcp_server_safe.py"

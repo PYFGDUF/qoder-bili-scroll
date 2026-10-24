@@ -1,0 +1,14 @@
+description = "现在看/回主人私信（不搜视频、不写日报）"
+prompt = """
+使用 bili-scroll 插件，只处理私信回话。
+
+1. 调用 bili_round_begin(mode="chat", source="manual")。
+2. 如果 next.action != "run"：只回一行 reason，结束；不要搜视频、不要发言。
+3. 如果 next.action == "run"：
+   - 读取 prompt_file；
+   - 只按「主人的私信」名单回：用 bili_dm_reply(message_key=..., text=...)，每条 ≤100 字；
+   - 名单外的人一律不理；陌生人只计数；分享视频卡片先读字幕再回；
+   - 回完调用 bili_round_end(run_id=..., status="ok"/"failed", summary="一句话")。
+4. 不要自己发私信摘要；摘要只在 scan 轮的 round_end 自动发。
+5. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用。
+"""

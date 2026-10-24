@@ -1,0 +1,23 @@
+{
+  "name": "bili-scroll",
+  "displayName": "刷B站",
+  "version": "0.2.1",
+  "description": "每天替你刷一轮B站：读字幕筛选、写日报；值得的@你，评论区默认只回你本人。",
+  "author": {
+    "name": "pengyufeng"
+  },
+  "license": "MIT",
+  "logo": "./assets/icon.png",
+  "keywords": [
+    "bilibili",
+    "digest",
+    "mcp",
+    "automation",
+    "duty"
+  ],
+  "skills": "./skills/",
+  "agents": [
+    "./agents/bili-duty.md"
+  ],
+  "mcpServers": "./.mcp.json"
+}

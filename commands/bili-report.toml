@@ -1,0 +1,10 @@
+description = "看今天的日报；可拆单条笔记"
+prompt = """
+使用 bili-scroll 插件查看日报。
+
+1. 调用 bili_report(action="show")。
+2. 有报告：把内容原样或分节展示给用户；不要改写事实。需要单条笔记时调用 bili_report(action="notes")，它会生成 reports/<BV>-<日期>.md。
+3. 没有今天的报告：调用 bili_report(action="list")，列出最近几份，并说明可以用 /bili-run 手动补跑。
+4. 不要在这条命令里发评论、私信或改配置；私信摘要只在 scan 轮的 round_end 自动发。
+5. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用。
+"""

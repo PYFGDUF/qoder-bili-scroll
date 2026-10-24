@@ -1,0 +1,39 @@
+# NOTICE
+
+This project is a Qoder plugin adaptation of **dsh-bili-scroll**.
+
+- Upstream: https://github.com/c1overzz/dsh-bili-scroll
+- Adapted from upstream version: **v2.0.1**, commit `31e3874f30418735692889305410253b625adef9`
+- Earlier baseline used for the vendored MCP: commit `0ce60bfeb29f5ee6bfec981d03843b2114943ad1`
+- Upstream license: MIT
+- Upstream has since published v2.0.2–v2.0.4. This adaptation stays on the
+  v2.0.1 feature set, except for the owner-identity security fix noted below.
+
+The vendored `vendor/bilibili-mcp/` is a third-party project:
+
+- Upstream: https://github.com/adoresever/bilibili-mcp
+- Copyright (c) 2026 AGI_Ananas
+- License: MIT (see `vendor/bilibili-mcp/LICENSE`)
+
+The duty charter in `skills/bili-scroll/references/charter.md` is adapted from
+`prompts/duty.md` in dsh-bili-scroll v2.0.1. The Chinese red-line wording is preserved.
+
+Changes made for Qoder:
+
+1. The DSH host is replaced by a Qoder plugin MCP server plus Qoder local
+   automations. Runtime data and credentials live outside the plugin directory,
+   under `~/.qoder-bili-scroll`.
+2. The vendored MCP server is imported by a whitelist wrapper. The wrapper keeps
+   the original `reply_gate` (send-time author verification) instead of adopting
+   the v2.0 vendor removal; it adds a credential-file tolerance patch only.
+3. Credential and policy paths are redirected to the Qoder data directory.
+4. Machine-level live-run policy checks, per-round caps, cross-process file locks,
+   and reply-text heuristics are added in front of `bili_reply`.
+5. v2.0 features ported to Python/Qoder: Bilibili DM delivery and owner-only DM
+   replies, deterministic DM summary, persona, tiered reports, per-video notes,
+   digest archive, tolerant watched-list parsing, and v1→v2 config migration.
+   Continuous 1-minute DM polling is replaced by checks at round/manual time.
+6. Ported the upstream v2.0.3 owner-identity tightening: the owner must be an
+   explicit `mentionUid` or the logged-in account whose nickname matches
+   `mentionName`. Nickname searches, the first search hit, and ledger inference
+   are never used to decide who the owner is.

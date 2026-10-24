@@ -1,0 +1,14 @@
+description = "看评论区谁在等我回话（只读；私信请用 /bili-dm）"
+prompt = """
+使用 bili-scroll 插件查看评论区收件箱。
+
+1. 调用 bili_inbox。它是 view-only：只列评论区名单，不会授权发任何评论。
+2. 用简洁列表汇报：每条的视频 BV、对方原话、已经来回几轮、还能回几轮。不要贴账号 UID、路径或内部 id 以外的隐私。
+3. 如果 replyToComments=false：说明这是“只看不发”，回复会被机器闸拒绝；要开启请先让用户运行 /bili-config，并明确确认。
+4. 如果名单为空：告诉用户“现在没有人在等你回话”，结束。
+5. 如果返回缺少 mentionUid 的错误：让用户先运行 /bili-config mentionUid=<他的B站UID>；不要自己猜昵称或搜索同名账号。
+6. 私信不在这个名单里：要看/回主人私信，用 /bili-dm。
+7. 不要在这条命令里发任何评论。
+8. 如果用户贴来一条 B站 App 的评论链接（含 BV + rpid）并说“这是我以前发的 / 认领这条”，调用 bili_claim_comment(bvid=..., rpid=...)，把 verified 结果告诉用户；这条命令仍然不发评论。
+9. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用；不要改用 Bash 拼接口。
+"""

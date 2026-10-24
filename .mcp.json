@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "bili-scroll": {
+      "command": "${QODER_PLUGIN_ROOT}/bin/bili-mcp",
+      "args": [],
+      "timeout": 600000
+    }
+  }
+}

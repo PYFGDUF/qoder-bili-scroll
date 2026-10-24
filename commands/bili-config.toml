@@ -1,0 +1,22 @@
+description = "查看/修改刷B站配置（每天几条、关键词、日报形态、回复开关）"
+prompt = """
+使用 bili-scroll 插件管理配置。参数：{{args}}
+
+- 没有参数：调用 bili_config(action="list")，用一张小表展示所有配置项和当前值。
+- 形如 key=value：先 bili_config(action="get", key=...)，再 bili_config(action="set", key=..., value=...)。
+- 一次可以处理多个 key=value，但每个都要单独 get → set。
+- 修改关键词时，把用户给的一行一个/逗号分隔的文本转成字符串列表。
+- 修正则说明：reportLevel 只能是 full / brief / off；dmMode 只能是 off / only / both；perDay/perRound/dmReplyPerDay 等是整数。
+- 新配置项：dmMode（投递方式）、dmReply（是否在轮次里回主人私信）、dmReplyPerRound、dmReplyPerDay、personaPrompt（人设文字或文件路径）、videoNotes（是否生成单条笔记）。
+
+安全要求：
+- 开启 dmMode（only/both）或 dmReply 之前，必须明确告诉用户“这会用你的 B 站账号发私信”，并得到肯定答复；得到答复后再带 confirm=true 调用。
+- 开启 autoComment 或 replyToComments 之前，必须明确告诉用户“这会用你的 B 站账号发言”，并得到肯定答复；得到答复后再带 confirm=true 调用。
+- dmMode=only 时机器层禁止公开评论；不要为了让评论发出去而改成 both 或手工改策略文件。
+- 把 replyOnlyMention 改成 false 之前也要确认：那会允许回复名单里的其他人。
+- 设置 autoComment 时必须同时有 mentionName；没有就先问昵称。
+- 必须设置 mentionUid（本人 B 站 UID）才能启用私信/只回本人；插件不按昵称猜人，mentionName 只用于 @ 文案。
+- mentionName/mentionUid 必须是“使用者本人”，不能是插件登录的这个账号；不确定就先问。
+- 改完把关键变化复述一遍。
+- 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用；不要改用 Bash 拼接口。
+"""

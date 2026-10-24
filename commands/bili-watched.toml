@@ -1,0 +1,10 @@
+description = "看刷过的视频、档位和单条笔记（只读）"
+prompt = """
+使用 bili-scroll 插件查看“刷过的视频”。
+
+1. 调用 bili_seen(action="list", limit=50)，拿到 date/bvid/title/verdict/status/picked/delivered/note/url。
+2. 调用 bili_report(action="list") 列出最近日报；需要时用 bili_report(action="notes") 把当天日报拆成单条笔记。
+3. 用表格展示：日期 / BV / 标题 / 档位 / 状态 / 是否有笔记 / 链接。可按“值得看 / 跳过 / 已发给你了”筛选，或按 BV 搜索。
+4. 只读：不要改配置、不要发评论/私信、不要重跑。
+5. 若 bili_* 工具没有直接暴露，先用 mcp_list 搜索 bili-scroll，再用 mcp_call 调用。
+"""

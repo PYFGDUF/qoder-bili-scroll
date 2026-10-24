@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="flowTitle flowDesc">
+  <title id="flowTitle">一轮刷 B 站的流程</title>
+  <desc id="flowDesc">五个阶段：触发、开轮、采集、判断、收束；下方是四道机器闸：只回主人、策略新鲜、文本检查、每日额度。</desc>
+
+  <rect width="1200" height="380" fill="#F6F3EC"/>
+
+  <text x="64" y="70" font-family="'Noto Serif CJK SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', serif" font-size="32" font-weight="600" fill="#1A1A18">一轮是怎么跑完的</text>
+  <text x="64" y="102" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="18" fill="#6B665C">确定性代码管边界，模型只负责读字幕、做判断、写日报。</text>
+
+  <g id="pipeline">
+    <line x1="130" y1="170" x2="1030" y2="170" stroke="#D9D2C5" stroke-width="1"/>
+
+    <circle cx="130" cy="170" r="16" fill="#F6F3EC" stroke="#1A1A18" stroke-width="1.2"/>
+    <text x="130" y="175" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#1A1A18">01</text>
+    <text x="130" y="220" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="21" font-weight="600" fill="#1A1A18">触发</text>
+    <text x="130" y="248" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#6B665C">命令 / 本地自动化</text>
+
+    <circle cx="355" cy="170" r="16" fill="#F6F3EC" stroke="#1A1A18" stroke-width="1.2"/>
+    <text x="355" y="175" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#1A1A18">02</text>
+    <text x="355" y="220" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="21" font-weight="600" fill="#1A1A18">开轮</text>
+    <text x="355" y="248" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#6B665C">额度 · 策略 · 名单</text>
+
+    <circle cx="580" cy="170" r="16" fill="#9E5B68" stroke="#9E5B68" stroke-width="1.2"/>
+    <text x="580" y="175" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#FFFCF5">03</text>
+    <text x="580" y="220" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="21" font-weight="600" fill="#1A1A18">采集</text>
+    <text x="580" y="248" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#6B665C">搜索 / 字幕 / 评论</text>
+
+    <circle cx="805" cy="170" r="16" fill="#F6F3EC" stroke="#1A1A18" stroke-width="1.2"/>
+    <text x="805" y="175" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#1A1A18">04</text>
+    <text x="805" y="220" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="21" font-weight="600" fill="#1A1A18">判断</text>
+    <text x="805" y="248" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#6B665C">档位 · 日报 · 笔记</text>
+
+    <circle cx="1030" cy="170" r="16" fill="#F6F3EC" stroke="#1A1A18" stroke-width="1.2"/>
+    <text x="1030" y="175" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" fill="#1A1A18">05</text>
+    <text x="1030" y="220" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="21" font-weight="600" fill="#1A1A18">收束</text>
+    <text x="1030" y="248" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#6B665C">私信摘要 · 收回许可</text>
+  </g>
+
+  <g id="gates">
+    <rect x="64" y="286" width="1072" height="58" rx="10" fill="#FFFCF5" stroke="#D9D2C5" stroke-width="1"/>
+    <text x="88" y="321" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="2" fill="#9E5B68">机器闸</text>
+    <line x1="196" y1="300" x2="196" y2="330" stroke="#E4DED2" stroke-width="1"/>
+
+    <text x="220" y="321" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#1A1A18">只回主人</text>
+    <line x1="360" y1="300" x2="360" y2="330" stroke="#E4DED2" stroke-width="1"/>
+    <text x="384" y="321" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#1A1A18">策略 12h 新鲜</text>
+    <line x1="560" y1="300" x2="560" y2="330" stroke="#E4DED2" stroke-width="1"/>
+    <text x="584" y="321" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#1A1A18">文本检查</text>
+    <line x1="720" y1="300" x2="720" y2="330" stroke="#E4DED2" stroke-width="1"/>
+    <text x="744" y="321" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#1A1A18">每日 / 每轮额度</text>
+    <line x1="940" y1="300" x2="940" y2="330" stroke="#E4DED2" stroke-width="1"/>
+    <text x="964" y="321" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif" font-size="17" fill="#1A1A18">失败两次即跳过</text>
+  </g>
+
+  <text x="64" y="370" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="1.2" fill="#A8A297">THE MODEL READS. THE GATES DECIDE WHAT MAY LEAVE.</text>
+</svg>
